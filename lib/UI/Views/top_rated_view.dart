@@ -1,30 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Models/movies_model.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/Models/movies.dart';
+import 'package:movie_app/UI/Views/Widgets/error_page.dart';
+import 'package:movie_app/UI/Views/Widgets/movie_tile.dart';
 
-class TopRatedView extends StatefulWidget {
+class TopRatedView extends ConsumerStatefulWidget {
   const TopRatedView({Key? key}) : super(key: key);
 
   @override
-  State<TopRatedView> createState() => _TopRatedViewState();
+  _TopRatedViewState createState() => _TopRatedViewState();
 }
 
-class _TopRatedViewState extends State<TopRatedView> {
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
+class _TopRatedViewState extends ConsumerState<TopRatedView> {
   @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-
-  @override
+  // ignore: avoid_renaming_method_parameters
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Top Rated'),
+    return Container(
+      child: ref.watch(topRatedFutureProvider).when(
+          data: (movies) {
+            return RefreshIndicator(
+              backgroundColor: Colors.white,
+              color: Colors.black,
+              onRefresh: () async {
+                return ref.refresh(topRatedFutureProvider);
+              },
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return MovieTile(
+                    movies: movies,
+                    index: index,
+
+                    // function: movies.removeAt(index),
+                  );
+                },
+                itemCount: movies.length,
+              ),
+            );
+          },
+          error: (e, s) {
+            return ErrorBody(
+                futureProvider: topRatedFutureProvider,
+                message: 'Error please try again!');
+          },
+          loading: () => const Center(child: CircularProgressIndicator())),
     );
   }
 }

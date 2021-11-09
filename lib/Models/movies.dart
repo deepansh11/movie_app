@@ -1,38 +1,63 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:flutter/widgets.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/Models/movies_model.dart';
+import 'package:movie_app/Services/movie_exceptions.dart';
+import 'package:movie_app/apis/endpoint_ulrs.dart';
 
-class Movies with ChangeNotifier {
-  final String apikey = '11d2ac79e0343be1884452c8d757b9a5';
+final movieServiceProvider = Provider<Movie>((ref) => Movie(Dio()));
 
-  List<MoviesModel> _movies = [];
+final moviesFutureProvider =
+    FutureProvider.autoDispose<List<MovieModel>>((ref) async {
+  ref.maintainState = true;
 
-  List<MoviesModel> get movies {
-    return [..._movies];
+  final movieService = ref.watch(movieServiceProvider);
+  final movies = await movieService.getMovies();
+
+  return movies;
+});
+
+final topRatedFutureProvider =
+    FutureProvider.autoDispose<List<MovieModel>>((ref) async {
+  ref.maintainState = true;
+
+  final movieService = ref.watch(movieServiceProvider);
+  final movies = await movieService.topRated();
+
+  return movies;
+});
+
+class Movie {
+  final Dio _dio;
+
+  Movie(this._dio);
+
+  get function => null;
+
+  Future<List<MovieModel>> getMovies() async {
+    try {
+      final movieResponse = await _dio.get(Endpoints.nowPlayingMoviesUrl(1));
+
+      final results =
+          List<Map<String, dynamic>>.from(movieResponse.data['results']);
+
+      List<MovieModel> movies =
+          results.map((moviedata) => MovieModel.fromMap(moviedata)).toList();
+      return movies;
+    } on DioError catch (dioError) {
+      throw MoviesException.fromDioError(dioError);
+    }
   }
 
-  Future<void> showMovies() async {
-    var url = Uri.parse(
-        'https://api.themoviedb.org/3/movie/now_playing?api_key=$apikey');
+  Future<List<MovieModel>> topRated() async {
+    final topRatedResponse = await _dio.get(Endpoints.topRatedUrl(1));
 
-    try {
-      final response = await http.get(url);
-      var results = json.decode(response.body);
-      // ignore: unnecessary_null_comparison
-      if (results == null) {
-        return;
-      }
-      Map<String, dynamic> extractedData = results;
+    final results =
+        List<Map<String, dynamic>>.from(topRatedResponse.data['results']);
 
-      final List<MoviesModel> loadedMovies = [];
+    List<MovieModel> movies =
+        results.map((movieData) => MovieModel.fromMap(movieData)).toList();
 
-      extractedData.forEach((key, value) {
-        print(key);
-        print(value);
-      });
-    } catch (e) {
-      throw e;
-    }
+    return movies;
   }
 }

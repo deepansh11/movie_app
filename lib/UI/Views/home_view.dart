@@ -4,9 +4,8 @@ import 'package:movie_app/Models/movies_model.dart';
 
 import 'package:movie_app/UI/Views/now_playing_view.dart';
 import 'package:movie_app/UI/Views/top_rated_view.dart';
-import 'package:provider/provider.dart';
 
-import 'search_bar.dart';
+import 'Widgets/search_bar.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -26,8 +25,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void didChangeDependencies() {
-    final nowPlaying = Provider.of<Movies>(context);
-    nowPlaying.showMovies();
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
   }

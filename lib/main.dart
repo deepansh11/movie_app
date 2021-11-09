@@ -1,13 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/Models/movies_model.dart';
 import 'package:movie_app/Services/theme_data.dart';
+import 'package:movie_app/UI/Views/details_page.dart';
 import 'package:movie_app/UI/Views/home_view.dart';
-import 'package:provider/provider.dart';
 
 import 'Models/movies.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,15 +17,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => Movies())],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Movie App',
-        theme: AppTheme().lightTheme,
-        darkTheme: AppTheme().darkTheme,
-        home: HomeView(),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Movie App',
+      theme: AppTheme().lightTheme,
+      darkTheme: AppTheme().darkTheme,
+      home: HomeView(),
     );
   }
 }
