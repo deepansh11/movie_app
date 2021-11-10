@@ -31,7 +31,7 @@ class MovieTile extends ConsumerWidget {
             movies![index].title!,
           ),
           subtitle: Text(
-            movies![index].description!,
+            movies![index].overview!,
             softWrap: true,
             maxLines: 5,
             overflow: TextOverflow.ellipsis,
@@ -48,7 +48,6 @@ class MovieTile extends ConsumerWidget {
           },
           leading: Image.network(
             movies![index].fullPosterPathUrl,
-            alignment: Alignment.centerLeft,
             width: 50,
             fit: BoxFit.cover,
           ),

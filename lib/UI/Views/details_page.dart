@@ -72,7 +72,7 @@ class DetailsPage extends ConsumerWidget {
                             height: 20,
                           ),
                           Text(
-                            this.movie.description!,
+                            this.movie.overview!,
                           ),
                         ],
                       ),

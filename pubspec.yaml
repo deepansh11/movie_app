@@ -37,6 +37,8 @@ dependencies:
   flutter_riverpod: ^1.0.0
   sliding_up_panel: ^2.0.0+1
   flutter_slidable:
+  sqflite:
+  path_provider:
   dio:
 
 dev_dependencies:

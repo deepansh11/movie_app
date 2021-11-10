@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:movie_app/Models/movies.dart';
 import 'package:movie_app/Models/movies_model.dart';
-
+import 'package:movie_app/Services/db_movies.dart';
 import 'package:movie_app/UI/Views/now_playing_view.dart';
 import 'package:movie_app/UI/Views/top_rated_view.dart';
 
 import 'Widgets/search_bar.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+class HomeView extends ConsumerStatefulWidget {
+  HomeView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends ConsumerState<HomeView> {
+  String query = '';
+  List<MovieModel>? movies;
   int _selectedIndex = 0;
 
   @override
@@ -38,7 +44,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _pages = <Widget>[
-      NowPlayingView(),
+      const NowPlayingView(),
       const TopRatedView()
     ];
     return Scaffold(
@@ -55,6 +61,6 @@ class _HomeViewState extends State<HomeView> {
             BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Top rated'),
           ],
         ),
-        appBar: const SearchBar());
+        appBar: SearchBar());
   }
 }

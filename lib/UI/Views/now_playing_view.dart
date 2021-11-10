@@ -2,11 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:movie_app/Models/movies_model.dart';
 import 'package:movie_app/UI/Views/Widgets/error_page.dart';
 import 'package:movie_app/UI/Views/Widgets/movie_tile.dart';
 import '../../Models/movies.dart';
-import 'details_page.dart';
 
 class NowPlayingView extends ConsumerStatefulWidget {
   const NowPlayingView({Key? key}) : super(key: key);
@@ -16,13 +14,6 @@ class NowPlayingView extends ConsumerStatefulWidget {
 }
 
 class _NowPlayingViewState extends ConsumerState<NowPlayingView> {
-  @override
-  void initState() {
-    super.initState();
-    // "ref" can be used in all life-cycles of a StatefulWidget.
-    ref.read(moviesFutureProvider);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(

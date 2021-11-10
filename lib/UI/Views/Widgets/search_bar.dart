@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/Services/db_movies.dart';
 
 class SearchBar extends ConsumerStatefulWidget with PreferredSizeWidget {
-  const SearchBar({
-    Key? key,
-  }) : super(key: key);
+  SearchBar();
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -15,38 +14,32 @@ class SearchBar extends ConsumerStatefulWidget with PreferredSizeWidget {
 }
 
 class _SearchBarState extends ConsumerState<SearchBar> {
-  TextEditingController? _controller;
-
+  final controller = TextEditingController();
   Icon customIcon = const Icon(
     Icons.search,
   );
   Widget customSearchBarText = const Text('Brew Apps');
-
-  void searchOperation(String searchText) {}
 
   void searchState() {
     setState(() {
       if (customIcon.icon == Icons.search) {
         customIcon = const Icon(Icons.cancel);
         customSearchBarText = ListTile(
-          leading: const Icon(
-            Icons.search,
-            color: Colors.white,
-            size: 28,
-          ),
           title: TextField(
-            controller: _controller,
-            onChanged: searchOperation,
+            controller: controller,
+            onChanged: (text) async {
+              DBmovies.db.findObjects(text);
+            },
             textAlign: TextAlign.center,
             decoration: const InputDecoration(
               hintText: 'Search a movie',
               hintStyle: TextStyle(
-                color: Colors.grey,
+                color: Colors.black,
               ),
               border: InputBorder.none,
             ),
             style: const TextStyle(
-              color: Colors.grey,
+              color: Colors.black,
             ),
           ),
         );
