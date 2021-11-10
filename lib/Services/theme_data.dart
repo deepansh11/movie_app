@@ -19,7 +19,7 @@ class ThemeNotifier with ChangeNotifier {
 // ignore: avoid_classes_with_only_static_members
 class AppTheme {
   ThemeData get darkTheme => ThemeData(
-        textSelectionColor: Colors.white,
+        textSelectionColor: Colors.black,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               elevation: MaterialStateProperty.all(5),
@@ -29,6 +29,7 @@ class AppTheme {
                   const TextStyle(fontWeight: FontWeight.bold))),
         ),
         textTheme: const TextTheme(
+            headline6: TextStyle(color: Colors.black),
             caption: TextStyle(
               color: Colors.black,
             ),
@@ -38,12 +39,14 @@ class AppTheme {
             )),
         primarySwatch: Colors.amber,
         appBarTheme: AppBarTheme(
-            actionsIconTheme: const IconThemeData(color: Colors.white),
+            titleTextStyle: const TextStyle(
+                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+            actionsIconTheme: const IconThemeData(color: Colors.black),
             brightness: Brightness.dark,
             color: Colors.amber.shade300),
         inputDecorationTheme: const InputDecorationTheme(
-          hintStyle: TextStyle(color: Colors.grey),
-          labelStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Colors.black),
+          labelStyle: TextStyle(color: Colors.black),
         ),
         brightness: Brightness.dark,
         canvasColor: Colors.amber,
@@ -67,6 +70,8 @@ class AppTheme {
               fontWeight: FontWeight.bold,
             )),
         appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           brightness: Brightness.light,
           color: Colors.amber,
         ),

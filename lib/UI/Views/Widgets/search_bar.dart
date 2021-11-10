@@ -25,24 +25,17 @@ class _SearchBarState extends ConsumerState<SearchBar> {
       if (customIcon.icon == Icons.search) {
         customIcon = const Icon(Icons.cancel);
         customSearchBarText = ListTile(
-          title: TextField(
-            controller: controller,
-            onChanged: (text) async {
-              DBmovies.db.findObjects(text);
-            },
-            textAlign: TextAlign.center,
-            decoration: const InputDecoration(
-              hintText: 'Search a movie',
-              hintStyle: TextStyle(
-                color: Colors.black,
-              ),
-              border: InputBorder.none,
-            ),
-            style: const TextStyle(
-              color: Colors.black,
-            ),
+            title: TextField(
+          controller: controller,
+          onChanged: (text) async {
+            DBmovies.db.findObjects(text);
+          },
+          textAlign: TextAlign.center,
+          decoration: const InputDecoration(
+            hintText: 'Search a movie',
+            border: InputBorder.none,
           ),
-        );
+        ));
       } else {
         customIcon = const Icon(Icons.search);
         customSearchBarText = const Text('Brew Apps');

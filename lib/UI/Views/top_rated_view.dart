@@ -26,11 +26,18 @@ class _TopRatedViewState extends ConsumerState<TopRatedView> {
               },
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  return MovieTile(
-                    movies: movies,
-                    index: index,
-
-                    // function: movies.removeAt(index),
+                  return Dismissible(
+                    background: Container(color: Colors.red),
+                    direction: DismissDirection.horizontal,
+                    key: UniqueKey(),
+                    onDismissed: (direction) => setState(() {
+                      movies.removeAt(index);
+                    }),
+                    child: MovieTile(
+                      movies: movies,
+                      index: index,
+                      // function: movies.removeAt(index),
+                    ),
                   );
                 },
                 itemCount: movies.length,
