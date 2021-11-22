@@ -41,7 +41,7 @@ class AppTheme {
         appBarTheme: AppBarTheme(
             titleTextStyle: const TextStyle(
                 color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-            actionsIconTheme: const IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             brightness: Brightness.dark,
             color: Colors.cyan.shade300),
         inputDecorationTheme: const InputDecorationTheme(
@@ -70,6 +70,7 @@ class AppTheme {
               fontWeight: FontWeight.bold,
             )),
         appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: Colors.white),
           titleTextStyle: TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           brightness: Brightness.light,

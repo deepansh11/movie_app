@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:movie_app/Models/movies.dart';
+import 'package:movie_app/Services/movies.dart';
 import 'package:movie_app/Models/movies_model.dart';
+import 'package:movie_app/Services/theme_data.dart';
 import 'package:movie_app/UI/Views/Widgets/error_page.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -16,22 +17,27 @@ class DetailsPage extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Details page'),
+        title: const Text('Details page'),
       ),
-      body: watch.watch(moviesFutureProvider).when(
+      body: watch.watch(topRatedFutureProvider).when(
           data: (movie) {
             return Container(
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(this.movie.fullBackDropPathUrl))),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(this.movie.fullBackDropPathUrl),
+                  ),
+                ),
                 child: SlidingUpPanel(
                     minHeight: 50,
-                    margin: EdgeInsets.all(50),
+                    margin: const EdgeInsets.all(50),
                     snapPoint: 0.4,
-                    color: Colors.black.withOpacity(0.5),
+                    color: MediaQuery.of(context).platformBrightness ==
+                            Brightness.dark
+                        ? Colors.black.withOpacity(0.5)
+                        : Colors.white.withOpacity(0.5),
                     panel: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -80,7 +86,7 @@ class DetailsPage extends ConsumerWidget {
           },
           error: (e, s) {
             return ErrorBody(
-                futureProvider: moviesFutureProvider,
+                futureProvider: topRatedFutureProvider,
                 message: 'Error please try again');
           },
           loading: () => const Center(

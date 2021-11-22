@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-
 import 'package:movie_app/Models/movies_model.dart';
 
 import '../details_page.dart';
 
 // ignore: must_be_immutable
-class MovieTile extends ConsumerWidget {
+class MovieTile extends StatelessWidget {
   List<MovieModel>? movies;
 
   int index;
@@ -19,7 +17,7 @@ class MovieTile extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, watch) {
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
