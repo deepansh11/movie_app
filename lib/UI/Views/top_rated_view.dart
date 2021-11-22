@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/Models/movies.dart';
+import 'package:movie_app/Services/movies.dart';
 import 'package:movie_app/UI/Views/Widgets/error_page.dart';
 import 'package:movie_app/UI/Views/Widgets/movie_tile.dart';
 
@@ -27,8 +27,16 @@ class _TopRatedViewState extends ConsumerState<TopRatedView> {
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return Dismissible(
-                    background: Container(color: Colors.red),
-                    direction: DismissDirection.horizontal,
+                    background: Container(
+                      padding: const EdgeInsets.only(right: 10),
+                      color: Colors.red,
+                      child: const Icon(
+                        Icons.delete,
+                        size: 50,
+                      ),
+                      alignment: Alignment.centerRight,
+                    ),
+                    direction: DismissDirection.endToStart,
                     key: UniqueKey(),
                     onDismissed: (direction) => setState(() {
                       movies.removeAt(index);
@@ -36,7 +44,6 @@ class _TopRatedViewState extends ConsumerState<TopRatedView> {
                     child: MovieTile(
                       movies: movies,
                       index: index,
-                      // function: movies.removeAt(index),
                     ),
                   );
                 },

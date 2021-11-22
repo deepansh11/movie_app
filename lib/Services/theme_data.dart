@@ -37,30 +37,30 @@ class AppTheme {
               color: Colors.black,
               fontWeight: FontWeight.bold,
             )),
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.cyan,
         appBarTheme: AppBarTheme(
             titleTextStyle: const TextStyle(
                 color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
             actionsIconTheme: const IconThemeData(color: Colors.black),
             brightness: Brightness.dark,
-            color: Colors.amber.shade300),
+            color: Colors.cyan.shade300),
         inputDecorationTheme: const InputDecorationTheme(
           hintStyle: TextStyle(color: Colors.black),
           labelStyle: TextStyle(color: Colors.black),
         ),
         brightness: Brightness.dark,
-        canvasColor: Colors.amber,
-        accentColor: Colors.amberAccent,
+        canvasColor: Colors.cyan,
+        accentColor: Colors.cyanAccent,
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
             selectedItemColor: Colors.black,
             unselectedItemColor: Colors.grey,
-            backgroundColor: Colors.amber.shade300),
-        accentIconTheme: const IconThemeData(color: Colors.amber),
+            backgroundColor: Colors.cyan.shade300),
+        accentIconTheme: const IconThemeData(color: Colors.cyan),
       );
 
   ThemeData get lightTheme => ThemeData(
         textSelectionColor: Colors.black,
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.cyan,
         textTheme: const TextTheme(
             caption: TextStyle(
               color: Colors.white,
@@ -73,7 +73,7 @@ class AppTheme {
           titleTextStyle: TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           brightness: Brightness.light,
-          color: Colors.amber,
+          color: Colors.cyan,
         ),
         inputDecorationTheme: const InputDecorationTheme(
           hintStyle: TextStyle(color: Colors.grey),
@@ -86,13 +86,13 @@ class AppTheme {
             foregroundColor: MaterialStateProperty.all(Colors.white),
           ),
         ),
-        canvasColor: Colors.amber.shade200,
+        canvasColor: Colors.cyan.shade200,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             selectedItemColor: Colors.white,
             unselectedItemColor: Colors.grey,
-            backgroundColor: Colors.amber),
+            backgroundColor: Colors.cyan),
         brightness: Brightness.light,
-        accentColor: Colors.amberAccent,
+        accentColor: Colors.cyanAccent,
         accentIconTheme: const IconThemeData(color: Colors.black),
       );
 }

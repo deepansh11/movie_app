@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/Models/movies_model.dart';
-import 'package:movie_app/Services/db_movies.dart';
 
 import 'package:movie_app/Services/movie_exceptions.dart';
 import 'package:movie_app/apis/endpoint_ulrs.dart';
@@ -13,7 +12,6 @@ final moviesFutureProvider =
     FutureProvider.autoDispose<List<MovieModel>>((ref) async {
   ref.maintainState = true;
 
-  DBmovies.db.getAllMovies();
   final movieService = ref.watch(movieServiceProvider);
   final movies = await movieService.getMovies();
 
