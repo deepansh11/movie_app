@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/Services/theme_data.dart';
 import 'package:movie_app/UI/Views/home_view.dart';
 
-void main() {
+void mainCommon() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
