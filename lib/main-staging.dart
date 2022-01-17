@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_app/config/config.dart';
-
-import 'main.dart';
+import 'package:movie_app/Services/theme_data.dart';
+import 'package:movie_app/UI/Views/home_view.dart';
 
 void main() {
-  var configApp =
-      const AppConfig(ProviderScope(child: MyApp()), 'Movie App Staging');
+  runApp(const ProviderScope(child: MyApp()));
+}
 
-  mainCommon();
-  runApp(configApp);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  static GlobalKey animationKey = GlobalKey();
+
+  @override
+  Widget build(BuildContext context) {
+    var appTitle = 'Movie Staging App';
+
+    return MaterialApp(
+      key: MyApp.animationKey,
+      debugShowCheckedModeBanner: false,
+      title: 'Movie App Staging',
+      theme: AppTheme().lightTheme,
+      darkTheme: AppTheme().darkTheme,
+      home: HomeView(
+        data: appTitle,
+      ),
+    );
+  }
 }

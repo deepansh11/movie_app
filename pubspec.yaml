@@ -40,6 +40,7 @@ dependencies:
   sqflite:
   path_provider:
   dio:
+  flutter_flavor: ^3.0.3
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +55,20 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+flutter_flavor:
+  dimensions:
+    android: "flutter-flavor"
 
+  flavors:
+    dev:
+      android:
+        name: "Dev App"
+        applicationId: "com.example.movie_app.dev"
+
+    prod:
+      app:
+        name: "Prod App"
+        id: "com.example.movie_app.prod"
 # The following section is specific to Flutter.
 flutter:
 

@@ -50,6 +50,22 @@ android {
         versionName flutterVersionName
     }
 
+    flavorDimensions "default"
+        productFlavors { 
+            production {
+                dimension "default"
+                applicationIdSuffix ""
+        }
+            staging {
+                dimension "default"
+                applicationIdSuffix ".stg"
+        }        
+            development {
+                dimension "default"
+                applicationIdSuffix ".dev"
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
@@ -58,23 +74,6 @@ android {
         }
     }
 
-    flavorDimensions "flavor-type"
-
-    productFlavors {
-        development {
-            dimension "flavor-type"
-            applicationIdSuffix ".dev"
-            versionSuffix "-dev"
-        }
-        product {
-            dimension "flavor-type"
-        }
-        staging {
-            dimension "flavor-type"
-            applicationIdSuffix ".staging"
-            versionSuffix "-staging"
-        }
-    }
 
 
 }
