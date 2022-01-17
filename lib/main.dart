@@ -10,9 +10,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  static GlobalKey animationKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      key: MyApp.animationKey,
       debugShowCheckedModeBanner: false,
       title: 'Movie App',
       theme: AppTheme().lightTheme,

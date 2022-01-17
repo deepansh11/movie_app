@@ -4,22 +4,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:movie_app/Services/movies.dart';
 import 'package:movie_app/Models/movies_model.dart';
-import 'package:movie_app/Services/theme_data.dart';
 import 'package:movie_app/UI/Views/Widgets/error_page.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class DetailsPage extends ConsumerWidget {
   final MovieModel movie;
-  const DetailsPage(this.movie);
+  const DetailsPage(this.movie, {Key? key}) : super(key: key);
 
   static const routeName = '/details-page';
   @override
-  Widget build(BuildContext context, watch) {
+  Widget build(BuildContext context, ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Details page'),
       ),
-      body: watch.watch(topRatedFutureProvider).when(
+      body: ref.watch(topRatedFutureProvider).when(
           data: (movie) {
             return Container(
                 decoration: BoxDecoration(

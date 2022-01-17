@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/Models/movies_model.dart';
+import 'package:movie_app/UI/Views/Widgets/custom_animation.dart';
+import 'package:movie_app/main.dart';
 
 import '../details_page.dart';
 
@@ -36,13 +38,9 @@ class MovieTile extends StatelessWidget {
           ),
           onTap: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailsPage(
-                  movies![index],
-                ),
-              ),
-            );
+                context,
+                CustomAnimation(
+                    MyApp.animationKey, DetailsPage.routeName, movies![index]));
           },
           leading: Image.network(
             movies![index].fullPosterPathUrl,
