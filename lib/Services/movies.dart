@@ -1,37 +1,75 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_app/Models/movies_model.dart';
+import 'package:movie_app/Models/video_model.dart';
+import 'package:movie_app/Services/movie_exceptions.dart';
 
 import 'package:movie_app/apis/endpoint_ulrs.dart';
 
-final movieServiceProvider = Provider<Movie>((ref) => Movie(Dio()));
+import 'base_service.dart';
 
-final topRatedFutureProvider =
-    FutureProvider.autoDispose<List<MovieModel>>((ref) async {
-  ref.maintainState = true;
-
-  final movieService = ref.watch(movieServiceProvider);
-  final movies = await movieService.topRated();
-
-  return movies;
-});
-
-class Movie {
-  final Dio _dio;
-
-  Movie(this._dio);
-
-  get function => null;
-
+class Movie extends BaseService {
   Future<List<MovieModel>> topRated() async {
-    final topRatedResponse = await _dio.get(Endpoints.topRatedUrl(1));
+    try {
+      final response = await dio.get(Endpoints.topRatedUrl(1));
 
-    final results =
-        List<Map<String, dynamic>>.from(topRatedResponse.data['results']);
+      final results = List<Map<String, dynamic>>.from(response.data['results']);
 
-    List<MovieModel> movies =
-        results.map((movieData) => MovieModel.fromMap(movieData)).toList();
+      List<MovieModel> movies =
+          results.map((movieData) => MovieModel.fromMap(movieData)).toList();
 
-    return movies;
+      return movies;
+    } on MoviesException catch (e, s) {
+      print('$e, $s');
+      return [];
+    }
+  }
+
+  Future<List<MovieModel>> popularMovies() async {
+    try {
+      final response = await dio.get(Endpoints.getPopularUrl(1));
+
+      final results = List<Map<String, dynamic>>.from(response.data['results']);
+
+      List<MovieModel> movies =
+          results.map((movieData) => MovieModel.fromMap(movieData)).toList();
+
+      return movies;
+    } on MoviesException catch (e, s) {
+      print('$e, $s');
+      return [];
+    }
+  }
+
+  Future<List<MovieModel>> upcomingMovies() async {
+    try {
+      final response = await dio.get(Endpoints.getUpcomingUrl(1));
+
+      final results = List<Map<String, dynamic>>.from(response.data['results']);
+
+      List<MovieModel> movies =
+          results.map((movieData) => MovieModel.fromMap(movieData)).toList();
+
+      return movies;
+    } on MoviesException catch (e, s) {
+      // TODO
+      print('$e,$s');
+      return [];
+    }
+  }
+
+  Future<List<VideoModel>?> getVideoUrl(int movieId) async {
+    try {
+      final response = await dio.get(Endpoints.getTrailerKey(movieId));
+
+      final results = List<Map<String, dynamic>>.from(response.data['results']);
+
+      List<VideoModel> videos =
+          results.map((movieData) => VideoModel.fromMap(movieData)).toList();
+
+      return videos;
+    } on MoviesException catch (e, s) {
+      // TODO
+      print('$e,$s');
+      return [];
+    }
   }
 }

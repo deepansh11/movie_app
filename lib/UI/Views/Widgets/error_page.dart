@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:movie_app/Models/movies_model.dart';
+import 'package:movie_app/repo/movie.dart';
 
 // ignore: must_be_immutable
 class ErrorBody extends ConsumerWidget {
-  AutoDisposeFutureProvider<List<MovieModel>> futureProvider;
-
-  ErrorBody({
+  const ErrorBody({
     Key? key,
-    required this.futureProvider,
     required this.message,
   }) : super(key: key);
 
@@ -17,7 +15,7 @@ class ErrorBody extends ConsumerWidget {
 
   @override
   // ignore: avoid_renaming_method_parameters
-  Widget build(BuildContext context, watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +23,9 @@ class ErrorBody extends ConsumerWidget {
           Text(message),
           ElevatedButton(
             onPressed: () async {
-              watch.refresh(futureProvider);
+              ref.refresh(topRatedFutureProvider);
+              ref.refresh(upcomingFutureProvider);
+              ref.refresh(popularFutureProvider);
             },
             child: const Text("Try again"),
           ),

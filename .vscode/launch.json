@@ -13,7 +13,7 @@
                 "--flavor",
                 "development",
                 "--target",
-                "lib/main_devel.dart"
+                "lib/main-dev.dart"
             ]
         },
         {
@@ -23,9 +23,9 @@
             "flutterMode": "profile",
             "args": [
                 "--flavor",
-                "development",
+                "production",
                 "--target",
-                "lib/main_devel.dart"
+                "lib/main.dart"
             ]
         }
     ]
