@@ -16,5 +16,6 @@ The project uses _Riverpod_ as the State management solution and also contains D
 3. Trailer in YouTube
 4. Bottom Navigation Bar
 5. Parallax Effect on Scroll
+6. Shimmers on loading
 
 This Project also includes some basic testing, using `flutter test`
